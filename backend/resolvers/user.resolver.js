@@ -1,10 +1,9 @@
-import { users } from "../dummyData/data.js";
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 
 const userResolver = {
 	Query: {
-		authUsers: async (_, _, { getUser }) => {
+		authUser: async (_, args, { getUser }) => {
 			try {
 				const user = await getUser();
 			} catch (err) {
@@ -70,7 +69,7 @@ const userResolver = {
 				throw new Error(err.message);
 			}
 		},
-		logout: async (_, _, context) => {
+		logout: async (_, args, context) => {
 			try {
 				await context.logout();
 				context.req.session.destroy((err) => {
